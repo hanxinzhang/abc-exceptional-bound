@@ -8,12 +8,14 @@ What this file does, in five steps:
 3. Verify that permuting a,b,c reduces these to 1632 representatives.
 4. Read an embedded proof tree for every representative.  An internal node
    makes another valid two-way choice; a leaf stores a sparse rational vector.
-5. At every leaf, use exact weak LP duality to prove D <= the claimed bound.
+5. At every leaf, clear rational denominators and verify the weak-duality
+   certificate as integer inequalities proving D <= the claimed bound.
 
 The long COMPRESSED_PROOF_DATA string is data, not executable code.  It stores
 only proof-tree tags, subset masks, and rational numbers.  Every decoded item
 is checked before it contributes to a PASS.  No optimizer, third-party package,
 external input file, or floating-point arithmetic is used.
+All rational quantities are constructed exactly with Fraction.
 """
 
 from base64 import b85decode
@@ -74,7 +76,12 @@ def item_index(name):
 
 
 def subset_mask(*names):
-    return sum(1 << item_index(name) for name in names)
+    require(len(names) == len(set(names)), "duplicate item in subset")
+    mask = 0
+    for name in names:
+        require(name in ITEMS, f"unknown subset item: {name}")
+        mask |= 1 << item_index(name)
+    return mask
 
 
 def p(layer):

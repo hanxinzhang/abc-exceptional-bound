@@ -31,6 +31,11 @@ bounds and does not run an optimizer.
    D = e_D^T x <= y^T A x <= y^T b <= r.
    ```
 
+The proof trees do not need to instantiate all 262,144 first-six-layer
+disjunctions. Unqueried disjunctions remain part of the finite program; each
+tree queries only those needed to cover the feasible points in its current
+branch.
+
 The long `COMPRESSED_PROOF_DATA` string is only a compact table of proof-tree
 tags, subset masks, and rational numbers. It is not executable code. Every
 decoded item is checked before the program can print `PASS`.
@@ -50,6 +55,8 @@ ALL EIGHT UPPER BOUNDS VERIFIED
 ```
 
 It checks 14,010 exact dual leaves, 954 valid geometry splits, and the complete
-permutation reduction. It uses no floating point, optimizer, external data, or
+permutation reduction. It uses exact rational arithmetic and clears
+denominators before the certificate comparisons are performed as integer
+inequalities. It uses no floating point, optimizer, external data, or
 third-party package. It proves the finite-program proposition only; the
 analytic transfer to `N_lambda(X)` is the written argument in the manuscript.
