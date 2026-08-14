@@ -1,5 +1,7 @@
 # What `verify_abc_bounds.py` proves
 
+Repository: https://github.com/hanxinzhang/abc-exceptional-bound
+
 The manuscript reduces its number-theoretic argument to seven finite claims:
 for each listed anchor `Lambda`, every feasible point of a rational system of
 inequalities satisfies `D <= r`.
@@ -50,9 +52,3 @@ It checks 12,378 exact dual leaves, 954 valid geometry splits, and the complete
 permutation reduction. It uses no floating point, optimizer, external data, or
 third-party package. It proves the finite-program proposition only; the
 analytic transfer to `N_lambda(X)` is the written argument in the manuscript.
-
-Release-file checksum:
-
-```text
-SHA256 (verify_abc_bounds.py) = 7af503f824968f840f44a1727406d4114d0ab9d4bb0beec2ae5ecf48c03176d1
-```
