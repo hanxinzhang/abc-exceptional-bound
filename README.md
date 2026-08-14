@@ -2,11 +2,11 @@
 
 Repository: https://github.com/hanxinzhang/abc-exceptional-bound
 
-The manuscript reduces its number-theoretic argument to seven finite claims:
+The manuscript reduces its number-theoretic argument to eight finite claims:
 for each listed anchor `Lambda`, every feasible point of a rational system of
 inequalities satisfies `D <= r`.
 
-The Python file checks those seven claims. It does **not** search for the
+The Python file checks those eight claims. It does **not** search for the
 bounds and does not run an optimizer.
 
 ## The check in plain language
@@ -17,7 +17,8 @@ bounds and does not run an optimizer.
 3. Verify that permuting `a,b,c` reduces these to 1,632 representatives while
    still covering all 8,192 branches.
 4. Follow the embedded proof tree for every representative. Each internal node
-   makes another valid two-way split, so its children cover the parent.
+   makes another valid two-way split, so its children cover every point of the
+   finite program satisfying the affine arms accumulated at the parent.
 5. At every leaf, read exact rational weights `y` and check
 
    ```text
@@ -45,10 +46,10 @@ python3 -I -S verify_abc_bounds.py
 A successful run ends with:
 
 ```text
-ALL SEVEN UPPER BOUNDS VERIFIED
+ALL EIGHT UPPER BOUNDS VERIFIED
 ```
 
-It checks 12,378 exact dual leaves, 954 valid geometry splits, and the complete
+It checks 14,010 exact dual leaves, 954 valid geometry splits, and the complete
 permutation reduction. It uses no floating point, optimizer, external data, or
 third-party package. It proves the finite-program proposition only; the
 analytic transfer to `N_lambda(X)` is the written argument in the manuscript.
